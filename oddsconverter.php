@@ -70,9 +70,6 @@ if ($oddstype == "fractional") {
     return $fractional = dec2frac($odds);
 }
 
-
-
-
 ?>
 
 <div><?php echo $oddstype; ?></div>
