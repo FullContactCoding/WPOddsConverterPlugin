@@ -40,7 +40,7 @@ if ($oddstype == "moneyline") {
     }
 }
 
-
+//Testing
 // convert decimal to fractions
 
 if ($oddstype == "fractional") {
