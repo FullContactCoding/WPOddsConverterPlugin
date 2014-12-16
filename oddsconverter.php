@@ -10,8 +10,35 @@
 <?php
 //store chosen value in a variable
 $oddstype = $_POST['oddstype'];
-$odds = 3;
+$odds = 1.21;
+$decimalOdds;
 
+
+if ($oddstype == "moneyline") {
+    // convert decimal to moneyline
+    function dec2moneyline($dec)
+    {
+
+        (float)$decimalOdds = $dec;
+
+        //check if decimal is 2.00 or higher
+        // if so moneyline = (decimal-1)*100
+        if ($decimalOdds >= 2.00) {
+
+            $moneyLine = ($decimalOdds - 1) * 100;
+            return "+".$moneyLine;
+        }
+        //if the amount is lower then 2.00
+        //moneyline = (-100)/(decimal-1)
+        else {
+            $moneyLine = (-100) / ($decimalOdds - 1);
+            return (integer)$moneyLine;
+        }
+
+
+
+    }
+}
 
 
 // convert decimal to fractions
@@ -40,14 +67,21 @@ if ($oddstype == "fractional") {
         return $dec . '/' . $div;
 
     }
-    return $odds = dec2frac($odds);
+    return $fractional = dec2frac($odds);
 }
 
 
 
 
 ?>
+
 <div><?php echo $oddstype; ?></div>
 
 <div><?php echo $odds; ?></div>
-
+<?php
+    if ($oddstype == "fractional") {
+        echo "<div>" . dec2frac($odds) . "</div>";
+    } else if($oddstype == "moneyline") {
+        echo "<div>" . dec2moneyline($odds) . "</div>";
+    }
+?>
